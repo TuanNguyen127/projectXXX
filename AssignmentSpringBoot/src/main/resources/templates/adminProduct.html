@@ -250,7 +250,7 @@
                                             <td><p th:text="${Product.idproduct}"></p></td>
                                             <td><p th:text="${Product.productname}"></p></td>
                                             <td><p th:text="${Product.quantity}"></p></td>
-                                            <td><p th:text="${Product.price}"> VNĐ</p></td>
+                                            <td><p th:text="${Product.price}"></p> VNĐ</td>
                                             <td><img alt="image" th:src="'/image/' + ${Product.image}" style="width: 100px;height: 100px;"></td>
                                             <td>
 	                                            <a th:href="@{/edit-product/} + ${Product.idproduct}">
