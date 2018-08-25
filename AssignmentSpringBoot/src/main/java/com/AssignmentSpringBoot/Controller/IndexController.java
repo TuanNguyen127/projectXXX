@@ -30,4 +30,9 @@ public class IndexController {
 		model.addAttribute("product",product);
 		return "detail";
 	}
+	
+	@RequestMapping("/checkOut")
+	public String showCheckOut() {
+		return "checkOut";
+	}
 }
