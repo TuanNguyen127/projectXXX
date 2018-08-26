@@ -22,7 +22,7 @@ public class Product implements Serializable {
 
 	private String productname;
 
-	private String quantity;
+	private Integer quantity;
 
 	public Product() {
 	}
@@ -59,11 +59,11 @@ public class Product implements Serializable {
 		this.productname = productname;
 	}
 
-	public String getQuantity() {
+	public Integer getQuantity() {
 		return this.quantity;
 	}
 
-	public void setQuantity(String quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 

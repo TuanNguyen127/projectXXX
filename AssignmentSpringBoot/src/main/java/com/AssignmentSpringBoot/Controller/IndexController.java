@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.AssignmentSpringBoot.Entity.Product;
@@ -31,7 +32,7 @@ public class IndexController {
 		return "detail";
 	}
 	
-	@RequestMapping("/checkOut")
+	@RequestMapping(value="/checkOut",method=RequestMethod.POST)
 	public String showCheckOut() {
 		return "checkOut";
 	}
