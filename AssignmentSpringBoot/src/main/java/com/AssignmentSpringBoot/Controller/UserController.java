@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -122,9 +123,17 @@ public class UserController {
 		return "signUp";
 	}
 	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	//sign up
 	@RequestMapping(value= "/saveSignUp", method=RequestMethod.POST)
 	public String doSignUp(@ModelAttribute("UserSignUp") User user, Model model) {
+		if(!userRepository.findByUsername(user.getUsername()).isEmpty()) {
+			model.addAttribute("error","người dùng đã tồn tại");
+			return "signUp";
+		}
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setRole("user");
 		userRepository.save(user);
 		
 		return "redirect:/sign-in";
