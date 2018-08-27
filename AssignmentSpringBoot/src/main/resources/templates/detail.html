@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Tuan Vu Shop | Detail</title>
+	<!--/tags -->
+	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<!--//tags -->
+	<link href="cssHome/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="cssHome/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="cssHome/font-awesome.css" rel="stylesheet">
+	
+	<!--pop-up-box-->
+	<link href="cssHome/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+	
+	<!-- price range -->
+	<link href="cssHome/jquery-ui1.css" rel="stylesheet" type="text/css">
+	
+	<!-- flexslider -->
+	<link href="cssHome/flexslider.css" rel="stylesheet" type="text/css" media="screen" />
+	
+	<!-- fonts -->
+	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+	
+	<!-- fa fa-icons -->
+	<link type="text/css" rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+</head>
+
+<body>
+	<!-- header-bot-->
+	<div class="header-bot">
+		<div class="header-bot_inner_wthreeinfo_header_mid">
+			<!-- header-bot-->
+			<div class="col-md-4 logo_agile">
+				<h1>
+					<a href="/"> <span>T</span>uan <span>V</span>u <span>S</span>hoppy
+						<img src="imagesHome/logoShop.png" alt=" ">
+					</a>
+				</h1>
+			</div>
+			<!-- header-bot -->
+			<div class="col-md-8 header">
+				<!-- header lists -->
+				<ul>
+					<li><span class="fa fa-phone" aria-hidden="true"></span> 222 333 444</li>
+					<li><a href="/sign-in"> <span class="fa fa-unlock-alt"
+							aria-hidden="true"></span> Đăng nhập
+					</a></li>
+					<li><a href="/sign-up"> <span
+							class="fa fa-pencil-square-o" aria-hidden="true"></span> Đăng ký
+					</a></li>
+				</ul>
+				<!-- //header lists -->
+				<!-- search -->
+				<div class="agileits_search">
+					<form action="#" method="post">
+						<input name="Search" type="search"
+							placeholder="Hôm nay tôi có thể giúp gì cho bạn?" required="">
+						<button type="submit" class="btn btn-default"
+							aria-label="Left Align">
+							<span class="fa fa-search" aria-hidden="true"> </span>
+						</button>
+					</form>
+				</div>
+				<!-- //search -->
+				<!-- cart details -->
+				<div class="top_nav_right">
+					<div class="wthreecartaits wthreecartaits2 cart cart box_1">
+						<form action="#" method="post" class="last">
+							<input type="hidden" name="cmd" value="_cart"> <input
+								type="hidden" name="display" value="1">
+							<button class="w3view-cart" type="submit" name="submit" value="">
+								<i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+							</button>
+						</form>
+					</div>
+				</div>
+				<!-- //cart details -->
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<!-- shop locator (popup) -->
+	<!-- //header-bot -->
+	<!-- navigation -->
+	<div class="ban-top">
+		<div class="container">
+			<div class="top_nav_left">
+				<nav class="navbar navbar-default">
+					<div class="container-fluid">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed"
+								data-toggle="collapse"
+								data-target="#bs-example-navbar-collapse-1"
+								aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+						</div>
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse menu--shylock"
+							id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav menu__list">
+								<li class=""><a class="nav-stylehead" href="/">Trang
+										chủ </a></li>
+								<li class=""><a class="nav-stylehead" href="/product">Sản
+										phẩm</a></li>
+								<li class=""><a class="nav-stylehead" href="/contact">Hộp
+										thư ý kiến</a></li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+	<!-- //navigation -->
+	<!-- banner-2 -->
+	<div class="page-head_agile_info_w3l">
+
+	</div>
+	<!-- //banner-2 -->
+	<!-- page -->
+	<div class="services-breadcrumb">
+		<div class="agile_inner_breadcrumb">
+			<div class="container">
+				<ul class="w3_short">
+					<li>
+						<a href="/">Home</a>
+						<i>|</i>
+					</li>
+					<li>Detail</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- //page -->
+	<!-- Single Page -->
+	<div class="banner-bootom-w3-agileits">
+		<div class="container">
+			<!-- tittle heading -->
+			<h3 class="tittle-w3l">Chi Tiết Sản Phẩm
+				<span class="heading-style">
+					<i></i>
+					<i></i>
+					<i></i>
+				</span>
+			</h3>
+			<!-- //tittle heading -->
+			<div class="col-md-5 single-right-left ">
+				<div class="grid images_3_of_2">
+					<div class="flexslider">
+						<ul class="slides">
+							<li th:data-thumb="'/image/' + ${product.image}" data-thumb="imagesHome/si.jpg">
+								<div class="thumb-image">
+									<img th:src="'/image/' + ${product.image}" src="imagesHome/si.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
+							</li>
+							<li th:data-thumb="'/image/' + ${product.image}" data-thumb="imagesHome/si.jpg">
+								<div class="thumb-image">
+									<img th:src="'/image/' + ${product.image}" src="imagesHome/si.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
+							</li>
+							<li th:data-thumb="'/image/' + ${product.image}" data-thumb="imagesHome/si.jpg">
+								<div class="thumb-image">
+									<img th:src="'/image/' + ${product.image}" src="imagesHome/si.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
+							</li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-7 single-right-left simpleCart_shelfItem">
+				<h3 th:text="${product.productname}">Zeeba Premium Basmati Rice - 5 KG</h3>
+				<p>
+					<span th:text="${product.price}" class="item_price">$950.00</span>
+					<label>Free delivery</label>
+				</p>
+				<div class="single-infoagile">
+					<ul>
+						<li>
+							Cash on Delivery Eligible.
+						</li>
+						<li>
+							Shipping Speed to Delivery.
+						</li>
+						<li>
+							Sold and fulfilled by Supple Tek (3.6 out of 5 | 8 ratings).
+						</li>
+						<li>
+							1 offer from
+							<span class="item_price">$950.00</span>
+						</li>
+					</ul>
+				</div>
+				
+				<div class="occasion-cart">
+					<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+						<form action="#" method="post">
+							<fieldset>
+								<input type="hidden" name="cmd" value="_cart" />
+								<input type="hidden" name="add" value="1" />
+								<input type="hidden" name="business" value=" " />
+								<input type="hidden" name="item_name" value="Zeeba Premium Basmati Rice - 5 KG" />
+								<input type="hidden" name="amount" value="950.00" />
+								<input type="hidden" name="discount_amount" value="1.00" />
+								<input type="hidden" name="currency_code" value="USD" />
+								<input type="hidden" name="return" value=" " />
+								<input type="hidden" name="cancel_return" value=" " />
+								<input type="submit" name="submit" value="Add to cart" class="button" />
+							</fieldset>
+						</form>
+					</div>
+
+				</div>
+
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+	<!-- //Single Page -->
+	<!-- special offers -->
+	<div class="featured-section" id="projects">
+		<div class="container">
+			<!-- tittle heading -->
+			<h3 class="tittle-w3l">Sản Phẩm Tương Tự
+				<span class="heading-style">
+					<i></i>
+					<i></i>
+					<i></i>
+				</span>
+			</h3>
+			<!-- //tittle heading -->
+			<div class="content-bottom-in">
+				<ul id="flexiselDemo1">
+					<li>
+						<div class="w3l-specilamk">
+							<div class="speioffer-agile">
+								<a href="/detail">
+									<img src="imagesHome/s1.jpg" alt="">
+								</a>
+							</div>
+							<div class="product-name-w3l">
+								<h4>
+									<a href="/detail">Aashirvaad, 5g</a>
+								</h4>
+								<div class="w3l-pricehkj">
+									<h6>$220.00</h6>
+								</div>
+								<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+									<form action="#" method="post">
+										<fieldset>
+											<input type="hidden" name="cmd" value="_cart" />
+											<input type="hidden" name="add" value="1" />
+											<input type="hidden" name="business" value=" " />
+											<input type="hidden" name="item_name" value="Aashirvaad, 5g" />
+											<input type="hidden" name="amount" value="220.00" />
+											<input type="hidden" name="discount_amount" value="1.00" />
+											<input type="hidden" name="currency_code" value="USD" />
+											<input type="hidden" name="return" value=" " />
+											<input type="hidden" name="cancel_return" value=" " />
+											<input type="submit" name="submit" value="Add to cart" class="button" />
+										</fieldset>
+									</form>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="w3l-specilamk">
+							<div class="speioffer-agile">
+								<a href="/detail">
+									<img src="imagesHome/s1.jpg" alt="">
+								</a>
+							</div>
+							<div class="product-name-w3l">
+								<h4>
+									<a href="/detail">Aashirvaad, 5g</a>
+								</h4>
+								<div class="w3l-pricehkj">
+									<h6>$220.00</h6>
+								</div>
+								<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+									<form action="#" method="post">
+										<fieldset>
+											<input type="hidden" name="cmd" value="_cart" />
+											<input type="hidden" name="add" value="1" />
+											<input type="hidden" name="business" value=" " />
+											<input type="hidden" name="item_name" value="Aashirvaad, 5g" />
+											<input type="hidden" name="amount" value="220.00" />
+											<input type="hidden" name="discount_amount" value="1.00" />
+											<input type="hidden" name="currency_code" value="USD" />
+											<input type="hidden" name="return" value=" " />
+											<input type="hidden" name="cancel_return" value=" " />
+											<input type="submit" name="submit" value="Add to cart" class="button" />
+										</fieldset>
+									</form>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="w3l-specilamk">
+							<div class="speioffer-agile">
+								<a href="/detail">
+									<img src="imagesHome/s1.jpg" alt="">
+								</a>
+							</div>
+							<div class="product-name-w3l">
+								<h4>
+									<a href="/detail">Aashirvaad, 5g</a>
+								</h4>
+								<div class="w3l-pricehkj">
+									<h6>$220.00</h6>
+								</div>
+								<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+									<form action="#" method="post">
+										<fieldset>
+											<input type="hidden" name="cmd" value="_cart" />
+											<input type="hidden" name="add" value="1" />
+											<input type="hidden" name="business" value=" " />
+											<input type="hidden" name="item_name" value="Aashirvaad, 5g" />
+											<input type="hidden" name="amount" value="220.00" />
+											<input type="hidden" name="discount_amount" value="1.00" />
+											<input type="hidden" name="currency_code" value="USD" />
+											<input type="hidden" name="return" value=" " />
+											<input type="hidden" name="cancel_return" value=" " />
+											<input type="submit" name="submit" value="Add to cart" class="button" />
+										</fieldset>
+									</form>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- //special offers -->
+
+	<!-- footer -->
+	<footer>
+		<div class="container">
+			<hr>
+			<hr>
+			<!-- footer third section -->
+			<div class="footer-info w3-agileits-info">
+				<!-- quick links -->
+				<div class="col-sm-10 address-right">
+					<div class="col-xs-6 footer-grids">
+						<h3>Menu Nhanh</h3>
+						<ul>
+							<li><a href="/">Trang chủ</a></li>
+							<li><a href="/product">Sản phẩm</a></li>
+							<li><a href="/contact">Hộp thư ý kiến</a></li>
+						</ul>
+					</div>
+					<div class="col-xs-6 footer-grids">
+						<h3>Địa Chỉ</h3>
+						<ul>
+							<li><i class="fa fa-map-marker"></i> 123 Nguyễn Văn T, Tp.Dương Thành V</li>
+							<li><i class="fa fa-mobile"></i> 333 222 444</li>
+							<li><i class="fa fa-phone"></i> +222 333 444</li>
+							<li><i class="fa fa-envelope-o"></i> tuanvushop@gmail.com</li>
+						</ul>
+					</div>
+				</div>
+				<!-- //quick links -->
+				<!-- social icons -->
+				<div class="col-sm-2 footer-grids  w3l-socialmk">
+					<h3>Follow Us on</h3>
+					<div class="social">
+						<ul>
+							<li><a class="icon fb" href="#"> <i
+									class="fa fa-facebook"></i>
+							</a></li>
+							<li><a class="icon tw" href="#"> <i
+									class="fa fa-twitter"></i>
+							</a></li>
+							<li><a class="icon gp" href="#"> <i
+									class="fa fa-google-plus"></i>
+							</a></li>
+						</ul>
+					</div>
+					<div class="agileits_app-devices">
+						<h5>Download the App</h5>
+						<a href="#"> <img src="imagesHome/1.png" alt=""></a>
+						<a href="#"> <img src="imagesHome/2.png" alt=""></a>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<!-- //social icons -->
+				<div class="clearfix"></div>
+			</div>
+			<!-- //footer third section -->
+		</div>
+	</footer>
+	<!-- //footer -->
+	
+	<!-- js-files -->
+	<!-- jquery -->
+	<script src="jsHome/jquery-2.1.4.min.js"></script>
+	<!-- //jquery -->
+
+	<!-- popup modal (for signin & signup)-->
+	<script src="jsHome/jquery.magnific-popup.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('.popup-with-zoom-anim').magnificPopup({
+				type: 'inline',
+				fixedContentPos: false,
+				fixedBgPos: true,
+				overflowY: 'auto',
+				closeBtnInside: true,
+				preloader: false,
+				midClick: true,
+				removalDelay: 300,
+				mainClass: 'my-mfp-zoom-in'
+			});
+
+		});
+	</script>
+	<!-- Large modal -->
+	<!-- <script>
+		$('#').modal('show');
+	</script> -->
+	<!-- //popup modal (for signin & signup)-->
+
+	<!-- cart-js -->
+	<script src="jsHome/minicart.js"></script>
+	<script>
+		paypalm.minicartk.render(); //use only unique class names other than paypal1.minicart1.Also Replace same class name in css and minicart.min.js
+
+		paypalm.minicartk.cart.on('checkout', function (evt) {
+			var items = this.items(),
+				len = items.length,
+				total = 0,
+				i;
+
+			// Count the number of each item in the cart
+			for (i = 0; i < len; i++) {
+				total += items[i].get('quantity');
+			}
+
+			if (total < 3) {
+				alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+				evt.preventDefault();
+			}
+		});
+	</script>
+	<!-- //cart-js -->
+
+	<!-- password-script -->
+	<script>
+		window.onload = function () {
+			document.getElementById("password1").onchange = validatePassword;
+			document.getElementById("password2").onchange = validatePassword;
+		}
+
+		function validatePassword() {
+			var pass2 = document.getElementById("password2").value;
+			var pass1 = document.getElementById("password1").value;
+			if (pass1 != pass2)
+				document.getElementById("password2").setCustomValidity("Passwords Don't Match");
+			else
+				document.getElementById("password2").setCustomValidity('');
+			//empty string means no validation error
+		}
+	</script>
+	<!-- //password-script -->
+
+	<!-- smoothscroll -->
+	<script src="jsHome/SmoothScroll.min.js"></script>
+	<!-- //smoothscroll -->
+
+	<!-- start-smooth-scrolling -->
+	<script src="jsHome/move-top.js"></script>
+	<script src="jsHome/easing.js"></script>
+	<script>
+		jQuery(document).ready(function ($) {
+			$(".scroll").click(function (event) {
+				event.preventDefault();
+
+				$('html,body').animate({
+					scrollTop: $(this.hash).offset().top
+				}, 1000);
+			});
+		});
+	</script>
+	<!-- //end-smooth-scrolling -->
+
+	<!-- smooth-scrolling-of-move-up -->
+	<script>
+		$(document).ready(function () {
+			/*
+			var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+			};
+			*/
+			$().UItoTop({
+				easingType: 'easeOutQuart'
+			});
+
+		});
+	</script>
+	<!-- //smooth-scrolling-of-move-up -->
+
+	<!-- imagezoom -->
+	<script src="jsHome/imagezoom.js"></script>
+	<!-- //imagezoom -->
+
+	<!-- FlexSlider -->
+	<script src="jsHome/jquery.flexslider.js"></script>
+	<script>
+		// Can also be used with $(document).ready()
+		$(window).load(function () {
+			$('.flexslider').flexslider({
+				animation: "slide",
+				controlNav: "thumbnails"
+			});
+		});
+	</script>
+	<!-- //FlexSlider-->
+
+	<!-- flexisel (for special offers) -->
+	<script src="jsHome/jquery.flexisel.js"></script>
+	<script>
+		$(window).load(function () {
+			$("#flexiselDemo1").flexisel({
+				visibleItems: 3,
+				animationSpeed: 1000,
+				autoPlay: true,
+				autoPlaySpeed: 3000,
+				pauseOnHover: true,
+				enableResponsiveBreakpoints: true,
+				responsiveBreakpoints: {
+					portrait: {
+						changePoint: 480,
+						visibleItems: 1
+					},
+					landscape: {
+						changePoint: 640,
+						visibleItems: 2
+					},
+					tablet: {
+						changePoint: 768,
+						visibleItems: 2
+					}
+				}
+			});
+
+		});
+	</script>
+	<!-- //flexisel (for special offers) -->
+
+	<!-- for bootstrap working -->
+	<script src="jsHome/bootstrap.js"></script>
+	<!-- //for bootstrap working -->
+	<!-- //js-files -->
+
+</body>
+
+</html>
