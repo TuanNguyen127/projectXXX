@@ -1,85 +1,83 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Sign Up | TuanVu Shop</title>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
-
-    <!-- Bootstrap Core Css -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-
-    <!-- Waves Effect Css -->
-    <link href="css/waves.css" rel="stylesheet" />
-
-    <!-- Animation Css -->
-    <link href="css/animate.css" rel="stylesheet" />
-
-    <!-- Custom Css -->
-    <link href="css/style.css" rel="stylesheet">
-</head>
-
-<body class="signup-page">
-    <div class="signup-box">
-        <div class="logo">
-            <a href="javascript:void(0);">Welcome to <b>TuanVuShop</b></a>
-        </div>
-        <div class="card">
-            <div class="body">
-                <form id="sign_up form_validation" th:action="@{/saveSignUp}" method="POST" th:object="${UserSignUp}">
-                    <div class="msg">Register a new membership</div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">person</i>
-                        </span>
-                        <div class="form-line">
-                            <input type="text" class="form-control" th:field="*{username}" placeholder="Name Surname" required autofocus>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">email</i>
-                        </span>
-                        <div class="form-line">
-                            <input type="email" class="form-control" th:field="*{email}" placeholder="Email Address" required>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">lock</i>
-                        </span>
-                        <div class="form-line">
-                            <input type="password" class="form-control" th:field="*{password}" minlength="6" placeholder="Password" required>
-                        </div>
-                    </div>
-                    <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">SIGN UP</button>
-
-                    <div class="m-t-25 m-b--5 align-center">
-                        <a href="/sign-in">You already have a membership?</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Jquery Core Js -->
-    <script src="js/jquery.min.js"></script>
-
-    <!-- Bootstrap Core Js -->
-    <script src="js/bootstrap.js"></script>
-
-    <!-- Waves Effect Plugin Js -->
-    <script src="js/waves.js"></script>
-
-    <!-- Validation Plugin Js -->
-    <script src="js/jquery.validate.js"></script>
-
-    <!-- Custom Js -->
-    <script src="js/admin.js"></script>
-    <script src="js/sign-up.js"></script>
-</body>
-
+	<head>
+	    <meta charset="UTF-8">
+	    <title>Sign Up | TuanVu Shop</title>
+	    
+	    <!-- Google Fonts -->
+	    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+	    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+	
+	    <!-- Bootstrap Core Css -->
+	    <link href="css/bootstrap.css" rel="stylesheet">
+	
+	    <!-- Waves Effect Css -->
+	    <link href="css/waves.css" rel="stylesheet" />
+	
+	    <!-- Animation Css -->
+	    <link href="css/animate.css" rel="stylesheet" />
+	
+	    <!-- Custom Css -->
+	    <link href="css/style.css" rel="stylesheet">
+	</head>
+	
+	<body class="signup-page">
+	    <div class="signup-box">
+	        <div class="logo">
+	            <a href="javascript:void(0);">Welcome to <b>TuanVuShop</b></a>
+	        </div>
+	        <div class="card">
+	            <div class="body">
+	                <form id="sign_up form_validation" th:action="@{/saveSignUp}" method="POST" th:object="${UserSignUp}">
+	                    <div class="msg">Register a new membership</div>
+	                    <div class="input-group">
+	                        <span class="input-group-addon">
+	                            <i class="material-icons">person</i>
+	                        </span>
+	                        <div class="form-line">
+	                            <input type="text" class="form-control" th:field="*{username}" placeholder="User Name" required autofocus>
+	                        </div>
+	                    </div>
+	                    <div class="input-group">
+	                        <span class="input-group-addon">
+	                            <i class="material-icons">email</i>
+	                        </span>
+	                        <div class="form-line">
+	                            <input type="email" class="form-control" th:field="*{email}" placeholder="Email Address" required>
+	                        </div>
+	                    </div>
+	                    <div class="input-group">
+	                        <span class="input-group-addon">
+	                            <i class="material-icons">lock</i>
+	                        </span>
+	                        <div class="form-line">
+	                            <input type="password" class="form-control" th:field="*{password}" minlength="6" placeholder="Password" required>
+	                        </div>
+	                    </div>
+	                    <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">SIGN UP</button>
+	
+	                    <div class="m-t-25 m-b--5 align-center">
+	                        <a href="/sign-in">You already have a membership?</a>
+	                    </div>
+	                </form>
+	            </div>
+	        </div>
+	    </div>
+	
+	    <!-- Jquery Core Js -->
+	    <script src="js/jquery.min.js"></script>
+	
+	    <!-- Bootstrap Core Js -->
+	    <script src="js/bootstrap.js"></script>
+	
+	    <!-- Waves Effect Plugin Js -->
+	    <script src="js/waves.js"></script>
+	
+	    <!-- Validation Plugin Js -->
+	    <script src="js/jquery.validate.js"></script>
+	
+	    <!-- Custom Js -->
+	    <script src="js/admin.js"></script>
+	    <script src="js/sign-up.js"></script>
+	</body>
 </html>

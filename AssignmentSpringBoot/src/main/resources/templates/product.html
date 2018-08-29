@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
-	<meta charset="utf-8">
-		<title>Tuan Vu Shop | Detail</title>
+		<meta charset="utf-8">
+		<title>Tuan Vu Shop | Product</title>
 		<!--/tags -->
 		<script>
-			addEventListener("load", function () {
+			addEventListener("load", function() {
 				setTimeout(hideURLbar, 0);
 			}, false);
-	
+		
 			function hideURLbar() {
 				window.scrollTo(0, 1);
 			}
@@ -40,14 +40,11 @@
 		<!-- price range -->
 		<link href="css/jquery-ui1.css" rel="stylesheet" type="text/css">
 		
-		<!-- flexslider -->
-		<link href="css/flexslider.css" rel="stylesheet" type="text/css" media="screen" />
-		
 		<!-- fonts -->
 		<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
 		
 		<!-- fa fa-icons -->
-		<link type="text/css" rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+		<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
 	</head>
 	
 	<body>
@@ -140,7 +137,7 @@
 									<li class="">
 										<a class="nav-stylehead" href="/">Trang Chủ</a>
 									</li>
-									<li class="">
+									<li class="active">
 										<a class="nav-stylehead" href="/product">Sản Phẩm</a>
 									</li>
 								</ul>
@@ -151,31 +148,12 @@
 			</div>
 		</div>
 		<!-- //navigation -->
-		
-		<!-- banner-2 -->
-		<div class="page-head_agile_info_w3l"></div>
-		<!-- //banner-2 -->
-		
-		<!-- page -->
-		<div class="services-breadcrumb">
-			<div class="agile_inner_breadcrumb">
-				<div class="container">
-					<ul class="w3_short">
-						<li>
-							<a href="/">Home</a>
-							<i>|</i>
-						</li>
-						<li>Chi tiết</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!-- //page -->
-		<!-- Single Page -->
-		<div class="banner-bootom-w3-agileits">
+		<!-- top Products -->
+		<div class="ads-grid">
 			<div class="container">
 				<!-- tittle heading -->
-				<h3 class="tittle-w3l">Chi tiết sản phẩm
+				<h3 class="tittle-w3l">
+					Sản Phẩm
 					<span class="heading-style">
 						<i></i>
 						<i></i>
@@ -183,47 +161,48 @@
 					</span>
 				</h3>
 				<!-- //tittle heading -->
-				<div class="col-md-5 single-right-left ">
-					<div class="grid images_3_of_2">
-						<div class="flexslider">
-							<ul class="slides">
-								<li th:data-thumb="'/image/' + ${product.image}" data-thumb="imagesHome/si.jpg">
-									<div class="thumb-image">
-										<img th:src="'/image/' + ${product.image}" src="imagesHome/si.jpg" data-imagezoom="true" class="img-responsive" alt="">
+				<!-- product right -->
+				<div class="agileinfo-ads-display col-md-12">
+					<div class="wrapper">
+						<!-- first section (nuts) -->
+						<div class="product-sec1">
+							<div th:each="product : ${products}" class="col-md-3 product-men">
+								<div class="men-pro-item simpleCart_shelfItem">
+									<div class="men-thumb-item">
+										<img th:src="'/image/' + ${product.image}"
+											src="imagesHome/m1.jpg" alt=""
+											style="width: 166px; height: 150px">
+										<div class="men-cart-pro">
+											<div class="inner-men-cart-pro">
+												<a th:href="@{'/detail?id=' + ${product.idproduct}}"
+													href="/detail" class="link-product-add-cart">View</a>
+											</div>
+										</div>
 									</div>
-								</li>
-								<li th:data-thumb="'/image/' + ${product.image}" data-thumb="imagesHome/si.jpg">
-									<div class="thumb-image">
-										<img th:src="'/image/' + ${product.image}" src="imagesHome/si.jpg" data-imagezoom="true" class="img-responsive" alt="">
+									<div class="item-info-product ">
+										<h4 style="white-space: nowrap; overflow: hidden;">
+											<a th:text="${product.productname}"
+												th:href="@{'/detail?id=' + ${product.idproduct}}"
+												href="single.html">Product name</a>
+										</h4>
+										<div class="info-product-price">
+											<span th:text="${product.price} + ' VND'" class="item_price">price</span>
+										</div>
+										<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+											<input type="button" value="Add to cart" class="button" th:onclick="${'javascript:addtocart(' + product.idproduct + ')'}"/>
+										</div>
 									</div>
-								</li>
-								<li th:data-thumb="'/image/' + ${product.image}" data-thumb="imagesHome/si.jpg">
-									<div class="thumb-image">
-										<img th:src="'/image/' + ${product.image}" src="imagesHome/si.jpg" data-imagezoom="true" class="img-responsive" alt="">
-									</div>
-								</li>
-							</ul>
+								</div>
+							</div>
 							<div class="clearfix"></div>
 						</div>
+						<!-- //first section (nuts) -->
 					</div>
 				</div>
-				<div class="col-md-7 single-right-left simpleCart_shelfItem">
-					<h3 th:text="${product.productname}"></h3>
-					<p>
-						<span th:text="${product.price} + ' VND'" class="item_price"></span>
-						<label>Free delivery</label>
-					</p>
-					<div class="occasion-cart">
-						<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-							<input type="button" value="Add to cart" class="button" th:onclick="${'javascript:addtocart(' + product.idproduct + ')'}"/>
-						</div>
-					</div>
-				</div>
-				<div class="clearfix"> </div>
+				<!-- //product right -->
 			</div>
 		</div>
-		<!-- //Single Page -->
-
+		<!-- //top products -->
 		<!-- footer -->
 		<footer>
 			<div class="container">
@@ -287,7 +266,7 @@
 			</div>
 		</footer>
 		<!-- //footer -->
-		
+	
 		<!-- jquery -->
 		<script src="js/jquery-2.1.4.min.js"></script>
 		<script src="js/jquery.magnific-popup.js"></script>
