@@ -11,22 +11,22 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap.css" rel="stylesheet">
 
     <!-- Waves Effect Css -->
-    <link href="css/waves.css" rel="stylesheet" />
+    <link href="/css/waves.css" rel="stylesheet" />
 
     <!-- Animation Css -->
-    <link href="css/animate.css" rel="stylesheet" />
+    <link href="/css/animate.css" rel="stylesheet" />
 
 	<!-- JQuery DataTable Css -->
-    <link href="css/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="/css/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- Custom Css -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-    <link href="css/all-themes.css" rel="stylesheet" />
+    <link href="/css/all-themes.css" rel="stylesheet" />
     
     <!-- fa fa-icons -->
     <link type="text/css" rel="stylesheet"
@@ -79,7 +79,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/admin-invoice">
+                        <a href="/admin/invoice">
                             <i class="fa fa-money"><span>Invoice</span></i>
                         </a>
                     </li>
@@ -89,10 +89,10 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="/admin-user">Table Users</a>
+                                <a href="/admin/user">Table Users</a>
                             </li>
                             <li class="active">
-                                <a href="/admin-product">Table Products</a>
+                                <a href="/admin/product">Table Products</a>
                             </li>
                         </ul>
                     </li>
@@ -102,10 +102,10 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="/admin-addnew-user">Add New User</a>
+                                <a href="/admin/addnew-user">Add New User</a>
                             </li>
                             <li>
-                                <a href="/admin-addnew-product">Add New Product</a>
+                                <a href="/admin/addnew-product">Add New Product</a>
                             </li>
                         </ul>
                     </li>
@@ -245,22 +245,22 @@
                                             <th>Delete</th>
                                         </tr>
                                     </tfoot>
-                                    <tbody:block th:each="Product : ${Product}">
+                                    <tbody:block th:each="Product : ${Products}">
                                         <tr>
-                                            <td><p th:text="${Product.idproduct}"></p></td>
+                                            <td><p th:text="${ProductStat.count}"></p></td>
                                             <td><p th:text="${Product.productname}"></p></td>
                                             <td><p th:text="${Product.quantity}"></p></td>
-                                            <td><p th:text="${Product.price}"></p> VNĐ</td>
-                                            <td><img alt="image" th:src="'/image/' + ${Product.image}" style="width: 100px;height: 100px;"></td>
+                                            <td><p th:text="${#numbers.formatInteger(__${Product.price}__,3,'POINT')} + ' VND'"></p></td>
+                                            <td><img alt="image" th:src="${Product.image} == null ? '/image/placeholder.png' : '/image/' + ${Product.image}" style="width: 100px;height: 100px;"></td>
                                             <td>
-	                                            <a th:href="@{/edit-product/} + ${Product.idproduct}">
+	                                            <a th:href="@{/admin/edit-product/} + ${Product.idproduct}">
 	                                            	<button type="button" class="btn btn-block btn-lg bg-blue waves-effect">
 	                                            		<i class="fa fa-pencil-square"></i>
 	                                            	</button>
                                             	</a>
                                             </td>
                                             <td>
-	                                            <a th:href="@{/del-product/} + ${Product.idproduct}">
+	                                            <a th:href="@{/admin/del-product/} + ${Product.idproduct}">
 	                                            	<button type="button" class="btn btn-block btn-lg bg-red waves-effect">
 	                                            		<i class="fa fa-trash"></i>
 	                                            	</button>
@@ -279,37 +279,37 @@
     </section>
 
     <!-- Jquery Core Js -->
-    <script src="js/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
 
     <!-- Bootstrap Core Js -->
-    <script src="js/bootstrap.js"></script>
+    <script src="/js/bootstrap.js"></script>
 
     <!-- Select Plugin Js -->
-    <script src="js/bootstrap-select.js"></script>
+    <script src="/js/bootstrap-select.js"></script>
 
     <!-- Slimscroll Plugin Js -->
-    <script src="js/jquery.slimscroll.js"></script>
+    <script src="/js/jquery.slimscroll.js"></script>
 
     <!-- Waves Effect Plugin Js -->
-    <script src="js/waves.js"></script>
+    <script src="/js/waves.js"></script>
 
 	<!-- Jquery DataTable Plugin Js -->
-    <script src="js/jquery.dataTables.js"></script>
-    <script src="js/dataTables.bootstrap.js"></script>
-    <script src="js/dataTables.buttons.min.js"></script>
-    <script src="js/buttons.flash.min.js"></script>
-    <script src="js/jszip.min.js"></script>
-    <script src="js/pdfmake.min.js"></script>
-    <script src="js/vfs_fonts.js"></script>
-    <script src="js/buttons.html5.min.js"></script>
-    <script src="js/buttons.print.min.js"></script>
+    <script src="/js/jquery.dataTables.js"></script>
+    <script src="/js/dataTables.bootstrap.js"></script>
+    <script src="/js/dataTables.buttons.min.js"></script>
+    <script src="/js/buttons.flash.min.js"></script>
+    <script src="/js/jszip.min.js"></script>
+    <script src="/js/pdfmake.min.js"></script>
+    <script src="/js/vfs_fonts.js"></script>
+    <script src="/js/buttons.html5.min.js"></script>
+    <script src="/js/buttons.print.min.js"></script>
 
     <!-- Custom Js -->
-    <script src="js/admin.js"></script>
-    <script src="js/jquery-datatable.js"></script>
+    <script src="/js/admin.js"></script>
+    <script src="/js/jquery-datatable.js"></script>
 
     <!-- Demo Js -->
-    <script src="js/demo.js"></script>
+    <script src="/js/demo.js"></script>
 </body>
 
 </html>

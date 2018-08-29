@@ -1,6 +1,7 @@
 package com.AssignmentSpringBoot.Controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -14,11 +15,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.AssignmentSpringBoot.Entity.Invoice;
+import com.AssignmentSpringBoot.Entity.Invoicedetail;
 import com.AssignmentSpringBoot.Entity.Product;
+import com.AssignmentSpringBoot.Repository.InvoiceDetailRepository;
+import com.AssignmentSpringBoot.Repository.InvoiceRepository;
 import com.AssignmentSpringBoot.Repository.ProductRepository;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -29,6 +37,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class GioHangController {
 	@Autowired
 	ProductRepository productRepository;
+	
+	@Autowired
+	InvoiceRepository invoiceRepository;
+	
+	@Autowired
+	InvoiceDetailRepository invoiceDetailRepo;
 
 	@GetMapping(value = "/addtocart/{id}")
 	@ResponseBody
@@ -59,6 +73,7 @@ public class GioHangController {
 				cart = URLDecoder.decode(cart, "UTF-8");
 			}
 			model.addAttribute("products", layDSSP(cart));
+			model.addAttribute("invoice",new Invoice());
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -141,5 +156,38 @@ public class GioHangController {
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<Product> listPr = objectMapper.readValue(gioHang, new TypeReference<List<Product>>() {});
 		return listPr;
+	}
+	
+	@RequestMapping(value="/checkout",method=RequestMethod.POST)
+	public String checkOutProcess(Model model,
+			@ModelAttribute("invoice") Invoice invoice,
+			@CookieValue(value="cart", required=false) String cart,
+			HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException, UnsupportedEncodingException {
+		
+		invoice.setStatus("Đang giao hàng");
+		invoiceRepository.save(invoice);
+		if(cart != null) {
+			cart = URLDecoder.decode(cart,"UTF-8");
+		}
+		for(Product product : layDSSP(cart)) {
+			Invoicedetail invoiceDetail = new Invoicedetail();
+			invoiceDetail.setProduct(product);
+			invoiceDetail.setInvoice(invoice);
+			invoiceDetail.setPrice(product.getPrice() * product.getQuantity());
+			invoiceDetail.setQuantity(product.getQuantity());
+			invoiceDetailRepo.save(invoiceDetail);
+		}
+		//Xóa cookie giỏ hàng
+		Cookie cookie = new Cookie("cart","");
+		cookie.setPath("/");
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
+		System.out.println("đặt hàng thành công");
+		return "redirect:/check-out-success";
+	}
+	
+	@RequestMapping("/check-out-success")
+	public String checkOutSuccess() {
+		return "check-out-success";
 	}
 }

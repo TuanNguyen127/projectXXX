@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -56,7 +56,7 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="images/user-admin.png" width="48" height="48" alt="a" />
+                    <img src="images/user-admin.png" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</div>
@@ -78,17 +78,17 @@
                             <i class="fa fa-users"><span>User</span></i>
                         </a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="/admin/invoice">
                             <i class="fa fa-money"><span>Invoice</span></i>
                         </a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="fa fa-list-ol"><span>Table</span></i>
                         </a>
                         <ul class="ml-menu">
-                            <li class="active">
+                            <li>
                                 <a href="/admin/user">Table Users</a>
                             </li>
                             <li>
@@ -216,63 +216,52 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2>
-                                All User
+                            <h2 th:text="'Chi tiết hóa đơn số #' + ${Invoice.idinvoice}">
+                                Invoice detail
                             </h2>
                         </div>
                         <div class="body">
+                        	<div>
+                        		<h4 th:inline="text">Tên khách hàng: [[${Invoice.customername}]]</h4>
+                        		<h4 th:inline="text">Địa chỉ: [[${Invoice.address}]]</h4>
+                        		<h4 th:inline="text">Số điện thoại: [[${Invoice.numberphone}]]</h4>
+                        		<h4 th:inline="text">Tình trạng: [[${Invoice.status}]]</h4>
+                        		<br>
+                        		<h3>Danh sách sản phẩm:</h3>
+                        	</div>
                             <div class="table-responsive">
-                                <table class="table table-bordered table-stripedtable-hover dataTable js-exportable">
+                                <table class="table table-bordered table-stripedtable-hover  dataTable">
                                     <thead>
                                         <tr>
                                             <th>SL.No</th>
-                                            <th>User Name</th>
-                                            <th>Password</th>
-                                            <th>Email</th>
-                                            <th>Role</th>
-                                            <th>Avatar</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
+                                            <th>Product Picture</th>
+                                            <th>Product Name</th>
+                                            <th>Quantity</th>
+                                            <th>Total Price</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>SL.No</th>
-                                            <th>User Name</th>
-                                            <th>Password</th>
-                                            <th>Email</th>
-                                            <th>Role</th>
-                                            <th>Avatar</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
+                                            <th>Product Picture</th>
+                                            <th>Product Name</th>
+                                            <th>Quantity</th>
+                                            <th>Total Price</th>
                                         </tr>
                                     </tfoot>
-                                    <tbody:block th:each="User : ${ListUser}">
+                                    <tbody:block th:each="InvoiceDetail : ${Invoice.invoicedetails}">
                                         <tr>
-                                            <td><p th:text="${UserStat.count}"></p></td>
-                                            <td><p th:text="${User.username}"></p></td>
-                                            <td><p>*Đã mã hóa*</p></td>
-                                            <td><p th:text="${User.email}"></p></td>
-                                            <td><p th:text="${User.role}"></p></td>
-                                            <td><img alt="avatar" th:src="${User.avatar} == null ? '/avatar/default_profile.png' : '/avatar/' + ${User.avatar}" style="width: 100px;height: 100px;"></td>
-                                            <td>
-	                                            <a th:href="@{/admin/edit-user/} + ${User.iduser}">
-	                                            	<button type="button" class="btn btn-block btn-lg bg-blue waves-effect">
-	                                            		<i class="fa fa-pencil-square"></i>
-	                                            	</button>
-                                            	</a>
-                                            </td>
-                                            <td>
-	                                            <a th:href="@{/admin/del-user/} + ${User.iduser}">
-	                                            	<button type="button" class="btn btn-block btn-lg bg-red waves-effect">
-	                                            		<i class="fa fa-trash"></i>
-	                                            	</button>
-                                            	</a>
-                                            </td>
+                                            <td><p th:text="${InvoiceDetailStat.count}"></p></td>
+                                            <td><img th:src="${InvoiceDetail.product.image} == null ? '/image/placeholder.png' : '/image/' + ${InvoiceDetail.product.image}" style="width: 100px; height: 100px;"></td>
+                                            <td><p th:text="${InvoiceDetail.product.productname}"></p></td>
+                                            <td><p th:text="${InvoiceDetail.quantity}"></p></td>
+                                            <td><p th:text="${#numbers.formatInteger(__${InvoiceDetail.price}__,3,'POINT')} + ' VND'"></p></td>
                                         </tr>
-                                    </tbody:block>
+                                	</tbody:block>
                                 </table>
                             </div>
+                            
+                            <div style="text-align: right; color: red;"><h4 th:inline="text">Tổng cộng: [[${#numbers.formatInteger(__${#aggregates.sum(Invoice.invoicedetails.![price])}__,3,'POINT')} + ' VND']]</h4></div>
                         </div>
                     </div>
                 </div>

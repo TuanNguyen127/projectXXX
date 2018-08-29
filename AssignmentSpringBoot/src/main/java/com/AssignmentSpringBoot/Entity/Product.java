@@ -3,6 +3,10 @@ package com.AssignmentSpringBoot.Entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.List;
+
 
 /**
  * The persistent class for the product database table.
@@ -12,21 +16,20 @@ import javax.persistence.*;
 @NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
 	private int idproduct;
-
 	private String image;
-
-	private String price;
-
+	private Integer price;
 	private String productname;
-
 	private Integer quantity;
+	@JsonIgnore
+	private List<Invoicedetail> invoicedetails;
 
 	public Product() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getIdproduct() {
 		return this.idproduct;
 	}
@@ -34,6 +37,7 @@ public class Product implements Serializable {
 	public void setIdproduct(int idproduct) {
 		this.idproduct = idproduct;
 	}
+
 
 	public String getImage() {
 		return this.image;
@@ -43,13 +47,15 @@ public class Product implements Serializable {
 		this.image = image;
 	}
 
-	public String getPrice() {
+
+	public Integer getPrice() {
 		return this.price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
+
 
 	public String getProductname() {
 		return this.productname;
@@ -59,12 +65,38 @@ public class Product implements Serializable {
 		this.productname = productname;
 	}
 
+
 	public Integer getQuantity() {
 		return this.quantity;
 	}
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+
+
+	//bi-directional many-to-one association to Invoicedetail
+	@OneToMany(mappedBy="product")
+	public List<Invoicedetail> getInvoicedetails() {
+		return this.invoicedetails;
+	}
+
+	public void setInvoicedetails(List<Invoicedetail> invoicedetails) {
+		this.invoicedetails = invoicedetails;
+	}
+
+	public Invoicedetail addInvoicedetail(Invoicedetail invoicedetail) {
+		getInvoicedetails().add(invoicedetail);
+		invoicedetail.setProduct(this);
+
+		return invoicedetail;
+	}
+
+	public Invoicedetail removeInvoicedetail(Invoicedetail invoicedetail) {
+		getInvoicedetails().remove(invoicedetail);
+		invoicedetail.setProduct(null);
+
+		return invoicedetail;
 	}
 
 }

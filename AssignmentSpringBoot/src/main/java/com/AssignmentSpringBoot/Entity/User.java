@@ -12,23 +12,19 @@ import javax.persistence.*;
 @NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
 	private int iduser;
-
 	private String avatar;
-
 	private String email;
-
 	private String password;
-
 	private String role;
-
 	private String username;
 
 	public User() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getIduser() {
 		return this.iduser;
 	}
@@ -36,6 +32,7 @@ public class User implements Serializable {
 	public void setIduser(int iduser) {
 		this.iduser = iduser;
 	}
+
 
 	public String getAvatar() {
 		return this.avatar;
@@ -45,6 +42,7 @@ public class User implements Serializable {
 		this.avatar = avatar;
 	}
 
+
 	public String getEmail() {
 		return this.email;
 	}
@@ -52,6 +50,7 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 
 	public String getPassword() {
 		return this.password;
@@ -61,6 +60,7 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
+
 	public String getRole() {
 		return this.role;
 	}
@@ -69,18 +69,13 @@ public class User implements Serializable {
 		this.role = role;
 	}
 
+
 	public String getUsername() {
 		return this.username;
 	}
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	@Override
-	public String toString() {
-		return "User [iduser=" + iduser + ", avatar=" + avatar + ", email=" + email + ", password=" + password
-				+ ", role=" + role + ", username=" + username + "]";
 	}
 
 }

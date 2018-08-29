@@ -2,6 +2,7 @@ package com.AssignmentSpringBoot.Entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -12,25 +13,19 @@ import javax.persistence.*;
 @NamedQuery(name="Invoice.findAll", query="SELECT i FROM Invoice i")
 public class Invoice implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
 	private int idinvoice;
-
 	private String address;
-
 	private String customername;
-
-	private String money;
-
 	private String numberphone;
-
-	private String productname;
-
-	private String quantity;
+	private String status;
+	private List<Invoicedetail> invoicedetails;
 
 	public Invoice() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getIdinvoice() {
 		return this.idinvoice;
 	}
@@ -38,6 +33,7 @@ public class Invoice implements Serializable {
 	public void setIdinvoice(int idinvoice) {
 		this.idinvoice = idinvoice;
 	}
+
 
 	public String getAddress() {
 		return this.address;
@@ -47,6 +43,7 @@ public class Invoice implements Serializable {
 		this.address = address;
 	}
 
+
 	public String getCustomername() {
 		return this.customername;
 	}
@@ -55,13 +52,6 @@ public class Invoice implements Serializable {
 		this.customername = customername;
 	}
 
-	public String getMoney() {
-		return this.money;
-	}
-
-	public void setMoney(String money) {
-		this.money = money;
-	}
 
 	public String getNumberphone() {
 		return this.numberphone;
@@ -71,20 +61,38 @@ public class Invoice implements Serializable {
 		this.numberphone = numberphone;
 	}
 
-	public String getProductname() {
-		return this.productname;
+
+	public String getStatus() {
+		return this.status;
 	}
 
-	public void setProductname(String productname) {
-		this.productname = productname;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	public String getQuantity() {
-		return this.quantity;
+
+	//bi-directional many-to-one association to Invoicedetail
+	@OneToMany(mappedBy="invoice")
+	public List<Invoicedetail> getInvoicedetails() {
+		return this.invoicedetails;
 	}
 
-	public void setQuantity(String quantity) {
-		this.quantity = quantity;
+	public void setInvoicedetails(List<Invoicedetail> invoicedetails) {
+		this.invoicedetails = invoicedetails;
+	}
+
+	public Invoicedetail addInvoicedetail(Invoicedetail invoicedetail) {
+		getInvoicedetails().add(invoicedetail);
+		invoicedetail.setInvoice(this);
+
+		return invoicedetail;
+	}
+
+	public Invoicedetail removeInvoicedetail(Invoicedetail invoicedetail) {
+		getInvoicedetails().remove(invoicedetail);
+		invoicedetail.setInvoice(null);
+
+		return invoicedetail;
 	}
 
 }

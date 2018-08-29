@@ -30,13 +30,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
-		http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
-		http.authorizeRequests().antMatchers("/user/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')");
+		http.authorizeRequests().antMatchers("/admin/**").hasRole("admin");
+		http.authorizeRequests().antMatchers("/user/**").hasAnyRole("admin,user");
 		//http.csrf().disable();
 		http.authorizeRequests().and().formLogin()
 		.loginProcessingUrl("/j_spring_security_login")
 		.loginPage("/sign-in")
-		.defaultSuccessUrl("/")
+		.defaultSuccessUrl("/default")
 		.failureUrl("/sign-in?message=error")
 		.usernameParameter("username")
 		.passwordParameter("password")
