@@ -79,7 +79,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/admin-invoice">
+                        <a href="/admin/invoice">
                             <i class="fa fa-money"><span>Invoice</span></i>
                         </a>
                     </li>
@@ -89,10 +89,10 @@
                         </a>
                         <ul class="ml-menu">
                             <li class="active">
-                                <a href="/admin-user">Table Users</a>
+                                <a href="/admin/user">Table Users</a>
                             </li>
                             <li>
-                                <a href="/admin-product">Table Products</a>
+                                <a href="/admin/product">Table Products</a>
                             </li>
                         </ul>
                     </li>
@@ -102,10 +102,10 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="/admin-addnew-user">Add New User</a>
+                                <a href="/admin/addnew-user">Add New User</a>
                             </li>
                             <li>
-                                <a href="/admin-addnew-product">Add New Product</a>
+                                <a href="/admin/addnew-product">Add New Product</a>
                             </li>
                         </ul>
                     </li>
@@ -219,7 +219,7 @@
                             <h2>Edit User</h2>
                         </div>
                         <div class="body">
-                            <form id="form_validation" method="POST" th:action="@{/EditUser}" th:object="${userModel}" enctype="multipart/form-data">
+                            <form id="form_validation" method="POST" th:action="@{/admin/EditUser}" th:object="${userModel}" enctype="multipart/form-data">
                             	<div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="text" class="form-control" th:field="*{user.iduser}" readonly="true" required>
@@ -232,7 +232,7 @@
                                         <label class="form-label">User Name</label>
                                     </div>
                                 </div>
-                                <div class="form-group form-float">
+                                <div class="form-group form-float hidden">
                                     <div class="form-line">
                                         <input type="text" class="form-control" th:field="*{user.password}" required>
                                         <label class="form-label">Password</label>
@@ -252,12 +252,12 @@
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="file" class="form-control" th:field="*{multipartFile}" required>
+                                        <input type="file" class="form-control" th:field="*{multipartFile}">
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
                                 	<div class="form-line">
-                                		<img th:src="'/avatar/' + ${userModel.user.avatar}" style="width: 100px;height: 100px">
+                                		<img th:src="${userModel.user.avatar} == null ? '/avatar/default_profile.png' : '/avatar/' + ${userModel.user.avatar}" style="width: 100px;height: 100px">
                                 	</div>
                                 </div>
                                 <button class="btn btn-primary waves-effect" type="submit">EDIT USER</button>

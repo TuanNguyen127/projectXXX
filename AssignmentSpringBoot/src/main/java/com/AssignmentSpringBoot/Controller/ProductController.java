@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,21 +31,21 @@ public class ProductController {
 	private Environment env;
 	
 	//hiển thị
-	@RequestMapping("/admin-product")
+	@RequestMapping("/admin/product")
 	public String adminProduct(Model model) {
-		model.addAttribute("Product", productRepository.findAll());
+		model.addAttribute("Products", productRepository.findAll(Sort.by(Direction.DESC, "idproduct")));
 		return "adminProduct";
 	}
 	
 	//load font thêm
-	@RequestMapping("/admin-addnew-product")
+	@RequestMapping("/admin/addnew-product")
 	public String adminAddNewProduct(Model model) {
 		model.addAttribute("ProductNew", new ProductModel());
 		return "addNewProduct";
 	}
 	
 	//thêm product
-	@RequestMapping(value= "/saveProduct", method=RequestMethod.POST)
+	@RequestMapping(value= "/admin/saveProduct", method=RequestMethod.POST)
 	public String doSaveUser(@ModelAttribute("ProductNew") ProductModel productModel, Model model) {
 		try {
 			MultipartFile multipartFile = productModel.getMultipartFile();
@@ -55,7 +57,7 @@ public class ProductController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/admin-product";
+		return "redirect:/admin/product";
 	}
 	
 	//vị trí ảnh lưu
@@ -80,14 +82,14 @@ public class ProductController {
 	}
 	
 	//xóa product
-	@RequestMapping("/del-product/{idproduct}")
+	@RequestMapping("/admin/del-product/{idproduct}")
 	public String DelProduct(@PathVariable int idproduct) {
 		productRepository.deleteById(idproduct);
-		return "redirect:/admin-product";
+		return "redirect:/admin/product";
 	}
 	
 	//get id into font edit
-	@RequestMapping("/edit-product/{idproduct}")
+	@RequestMapping("/admin/edit-product/{idproduct}")
 	public String editProduct(@PathVariable int idproduct, Model model) {
 		Optional<Product> product = productRepository.findById(idproduct);
 		ProductModel productModel = new ProductModel();
@@ -99,10 +101,10 @@ public class ProductController {
 	}
 		
 	//Lưu lại sau khi đã edit
-	@RequestMapping("/EditProduct")
+	@RequestMapping("/admin/EditProductProcess")
 	public String doEditUser(@ModelAttribute("productModel") ProductModel productModel, Model model) {
 		Optional<Product> product = productRepository.findById(productModel.getProduct().getIdproduct());
-		if(productModel.getMultipartFile() == null) {
+		if(productModel.getMultipartFile().isEmpty()) {
 			String oldAvatarName = product.get().getImage();
 			productModel.getProduct().setImage(oldAvatarName);
 			productRepository.save(productModel.getProduct());
@@ -118,6 +120,6 @@ public class ProductController {
 				e.printStackTrace();
 			}
 		}
-		return "redirect:/admin-product";
+		return "redirect:/admin/product";
 	}
 }

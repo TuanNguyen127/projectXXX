@@ -2,10 +2,10 @@
 -- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 23, 2018 lúc 04:13 PM
--- Phiên bản máy phục vụ: 10.1.28-MariaDB
--- Phiên bản PHP: 7.1.11
+-- Host: 127.0.0.1
+-- Generation Time: Aug 29, 2018 at 12:47 PM
+-- Server version: 10.1.30-MariaDB
+-- PHP Version: 5.6.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,35 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `springbootass`
+-- Database: `springbootass`
 --
+CREATE DATABASE IF NOT EXISTS `springbootass` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `springbootass`;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `invoice`
+-- Table structure for table `hibernate_sequence`
+--
+
+CREATE TABLE `hibernate_sequence` (
+  `next_val` bigint(20) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `hibernate_sequence`
+--
+
+INSERT INTO `hibernate_sequence` (`next_val`) VALUES
+(3),
+(3),
+(3),
+(3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoice`
 --
 
 CREATE TABLE `invoice` (
@@ -33,23 +55,46 @@ CREATE TABLE `invoice` (
   `customername` varchar(50) DEFAULT NULL,
   `numberphone` varchar(20) DEFAULT NULL,
   `address` varchar(250) DEFAULT NULL,
-  `productname` varchar(50) DEFAULT NULL,
-  `quantity` varchar(10) DEFAULT NULL,
-  `money` varchar(100) DEFAULT NULL
+  `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `invoice`
+-- Dumping data for table `invoice`
 --
 
-INSERT INTO `invoice` (`idinvoice`, `customername`, `numberphone`, `address`, `productname`, `quantity`, `money`) VALUES
-(1, 'Nguyễn Văn Tuấn', '0123456789', '123 Nguyễn Văn A', 'samsung galaxy ss', '1', '20000000'),
-(2, 'Dương Tnành Vũ', '0987654321', '11/11/11 Nguyễn Văn B', 'laptop dell', '2', '100000000');
+INSERT INTO `invoice` (`idinvoice`, `customername`, `numberphone`, `address`, `status`) VALUES
+(11, 'Bùi Tiến Dũng', '0985390133', '41/32 Đường số 9, P. Linh Tây, Thủ Đức', 'Đang giao hàng'),
+(12, 'Nguyễn Văn Tuấn', '04378294278', 'Buôn Ma Thuột, Đăk Lăk, Việt Nam', 'Đang giao hàng');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `product`
+-- Table structure for table `invoicedetail`
+--
+
+CREATE TABLE `invoicedetail` (
+  `idinvoicedetail` int(11) NOT NULL,
+  `idinvoice` int(11) NOT NULL,
+  `idproduct` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `invoicedetail`
+--
+
+INSERT INTO `invoicedetail` (`idinvoicedetail`, `idinvoice`, `idproduct`, `quantity`, `price`) VALUES
+(5, 11, 15, 1, 8990000),
+(6, 11, 16, 1, 1990000),
+(7, 11, 12, 3, 83970000),
+(8, 11, 14, 1, 40000000),
+(9, 12, 18, 2, 15980000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
 --
 
 CREATE TABLE `product` (
@@ -61,7 +106,7 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `product`
+-- Dumping data for table `product`
 --
 
 INSERT INTO `product` (`idproduct`, `productname`, `quantity`, `price`, `image`) VALUES
@@ -80,72 +125,99 @@ INSERT INTO `product` (`idproduct`, `productname`, `quantity`, `price`, `image`)
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
   `iduser` int(11) NOT NULL,
   `username` varchar(50) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
+  `password` varchar(70) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `role` varchar(20) DEFAULT 'user',
   `avatar` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`iduser`, `username`, `password`, `email`, `role`, `avatar`) VALUES
-(15, 'admin', 'admin123', 'admin@gmail.com', 'admin', '18033503_1316361428452229_4784812576813699924_n.jpg'),
-(16, 'user', '123456', 'user@gmail.com', 'user', '18403160_243558402789207_1781303159863596889_n.jpg'),
+(15, 'admin', '$2a$04$Q2Cq0k57zf2Vs/n3JXwzmerql9RzElr.J7aQd3/Sq0fw/BdDFPAj.', 'admin@gmail.com', 'admin', '18033503_1316361428452229_4784812576813699924_n.jpg'),
+(16, 'user', '/n/b/n/d/n\\n\\b\\n\\d\\n', 'user@gmail.com', 'user', '18403160_243558402789207_1781303159863596889_n.jpg'),
 (18, 'tuan', '123456', 'tuan@gmail.com', 'user', '24129797_159181621481116_3420292741263157417_n.jpg'),
 (20, 'admin123', '123123', 'admin123@gmail.com', 'user', '22449911_2016763005206039_8398298410270631644_n.jpg'),
-(21, 'themUser', '123123', 'themUser@gmail.com', 'admin', 'oppo-f7-bac-400x460.png');
+(21, 'themUser', '123123', 'themUser@gmail.com', 'admin', 'oppo-f7-bac-400x460.png'),
+(22, 'nguoidung1', '$2a$10$QtxLsn4jVQVcY48a2jN6oeTFYlgb6/G7b9Cn1hfnH8QrLz0gKnrrW', 'nguoidung1@abc.com', 'user', NULL),
+(24, 'vudt.93', 'bb1bb8c4-485a-441b-ab71-fe2d4f2e2fce', 'vudt.93@gmail.com', 'user', 'ab01e435-3350-4da1-b433-ab5270cdc81a.jpg');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `invoice`
+-- Indexes for table `invoice`
 --
 ALTER TABLE `invoice`
   ADD PRIMARY KEY (`idinvoice`);
 
 --
--- Chỉ mục cho bảng `product`
+-- Indexes for table `invoicedetail`
+--
+ALTER TABLE `invoicedetail`
+  ADD PRIMARY KEY (`idinvoicedetail`),
+  ADD KEY `invoicedetail` (`idinvoice`),
+  ADD KEY `invoiceproduct` (`idproduct`);
+
+--
+-- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`idproduct`);
 
 --
--- Chỉ mục cho bảng `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`iduser`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `invoice`
+-- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `idinvoice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idinvoice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT cho bảng `product`
+-- AUTO_INCREMENT for table `invoicedetail`
+--
+ALTER TABLE `invoicedetail`
+  MODIFY `idinvoicedetail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `idproduct` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `idproduct` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT cho bảng `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `invoicedetail`
+--
+ALTER TABLE `invoicedetail`
+  ADD CONSTRAINT `invoicedetail` FOREIGN KEY (`idinvoice`) REFERENCES `invoice` (`idinvoice`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `invoiceproduct` FOREIGN KEY (`idproduct`) REFERENCES `product` (`idproduct`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

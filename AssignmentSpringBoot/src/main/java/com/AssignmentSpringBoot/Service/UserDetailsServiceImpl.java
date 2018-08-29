@@ -29,10 +29,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		}
 		com.AssignmentSpringBoot.Entity.User ua = uaList.get(0);
 		System.out.println("found user " + ua);
-		GrantedAuthority authority = new SimpleGrantedAuthority(ua.getRole());
+		GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_"+ua.getRole());
 		List<GrantedAuthority> grantList = new ArrayList<>();
 		grantList.add(authority);
-		UserDetails userDetail = new User(ua.getUsername(),ua.getPassword(),grantList);
+		UserDetails userDetail = new CustomUser(ua.getUsername(),ua.getPassword(),grantList,ua.getAvatar());
 		return userDetail;
 	}
 

@@ -2,11 +2,18 @@ package com.AssignmentSpringBoot.Controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Optional;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,19 +37,19 @@ public class UserController {
 	private Environment env;
 	
 	//hiển thị
-	@RequestMapping("/admin-user")
+	@RequestMapping("/admin/user")
 	public String adminUser(Model model) {
-		model.addAttribute("ListUser", userRepository.findAll());
+		model.addAttribute("ListUser", userRepository.findAll(Sort.by(Direction.DESC, "iduser")));
 		return "adminUser";
 	}
 	//load font thêm
-	@RequestMapping("/admin-addnew-user")
+	@RequestMapping("/admin/addnew-user")
 	public String adminAddNewUser(Model model) {
 		model.addAttribute("UserNew", new UserModel());
 		return "addNewUser";
 	}
 	//thêm user
-	@RequestMapping(value= "/saveUser", method=RequestMethod.POST)
+	@RequestMapping(value= "/admin/saveUser", method=RequestMethod.POST)
 	public String doSaveUser(@ModelAttribute("UserNew") UserModel userModel, Model model) {
 		try {
 			MultipartFile multipartFile = userModel.getMultipartFile();
@@ -50,11 +57,13 @@ public class UserController {
 			File file = new File(this.getFolderUpload(), fileName);
 			multipartFile.transferTo(file);
 			userModel.getUser().setAvatar(fileName);
+			//mã hóa password
+			userModel.getUser().setPassword(passwordEncoder.encode(userModel.getUser().getPassword()));
 			userRepository.save(userModel.getUser());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/admin-user";
+		return "redirect:/admin/user";
 	}
 	
 	//vị trí ảnh lưu
@@ -77,13 +86,13 @@ public class UserController {
 		}
 	}
 	//xóa user
-	@RequestMapping("/del-user/{iduser}")
+	@RequestMapping("/admin/del-user/{iduser}")
 	public String DelUser(@PathVariable int iduser) {
 		userRepository.deleteById(iduser);
-		return "redirect:/admin-user";
+		return "redirect:/admin/user";
 	}
 	//get id into font edit
-	@RequestMapping("/edit-user/{iduser}")
+	@RequestMapping("/admin/edit-user/{iduser}")
 	public String editUser(@PathVariable int iduser, Model model) {
 		Optional<User> user = userRepository.findById(iduser);
 		UserModel userModel = new UserModel();
@@ -94,10 +103,10 @@ public class UserController {
 		return "adminEditUser";
 	}
 	//Lưu lại sau khi đã edit
-	@RequestMapping("/EditUser")
+	@RequestMapping("/admin/EditUser")
 	public String doEditUser(@ModelAttribute("userModel") UserModel userModel, Model model) {
 		Optional<User> user = userRepository.findById(userModel.getUser().getIduser());
-		if(userModel.getMultipartFile() == null) {
+		if(userModel.getMultipartFile().isEmpty()) {
 			String oldAvatarName = user.get().getAvatar();
 			userModel.getUser().setAvatar(oldAvatarName);
 			userRepository.save(userModel.getUser());
@@ -113,7 +122,7 @@ public class UserController {
 				e.printStackTrace();
 			}
 		}
-		return "redirect:/admin-user";
+		return "redirect:/admin/user";
 	}
 	
 	//load font sign up
@@ -140,7 +149,16 @@ public class UserController {
 	}
 	
 	@RequestMapping("/admin")
-	public String admin() {
+	public String admin(Model model, Principal principal) {
+		model.addAttribute("user", userRepository.findByUsername(principal.getName()).get(0));
 		return "admin";
+	}
+	
+	@RequestMapping("/default")
+	public String chooseWhereToGoAfterLoginSuccessfully(HttpServletRequest request) {
+		if(request.isUserInRole("ROLE_admin")) {
+			return "redirect:/admin";
+		}
+		return "redirect:/";
 	}
 }
