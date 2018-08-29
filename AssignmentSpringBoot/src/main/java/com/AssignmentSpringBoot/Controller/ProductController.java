@@ -2,7 +2,6 @@ package com.AssignmentSpringBoot.Controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
@@ -120,13 +119,5 @@ public class ProductController {
 			}
 		}
 		return "redirect:/admin-product";
-	}
-	
-	//Product List
-	@RequestMapping("/product")
-	public String Product(Model model) {
-		List<Product> products = productRepository.findAll();
-		model.addAttribute("Products", products);
-		return "product";
 	}
 }

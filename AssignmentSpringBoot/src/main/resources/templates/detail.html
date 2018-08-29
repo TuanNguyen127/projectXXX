@@ -13,18 +13,18 @@
 		}
 	</script>
 	<!--//tags -->
-	<link href="/cssHome/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="/cssHome/style.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="/cssHome/font-awesome.css" rel="stylesheet">
+	<link href="cssHome/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="cssHome/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="cssHome/font-awesome.css" rel="stylesheet">
 	
 	<!--pop-up-box-->
-	<link href="/cssHome/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="cssHome/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
 	
 	<!-- price range -->
-	<link href="/cssHome/jquery-ui1.css" rel="stylesheet" type="text/css">
+	<link href="cssHome/jquery-ui1.css" rel="stylesheet" type="text/css">
 	
 	<!-- flexslider -->
-	<link href="/cssHome/flexslider.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="cssHome/flexslider.css" rel="stylesheet" type="text/css" media="screen" />
 	
 	<!-- fonts -->
 	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
@@ -41,7 +41,7 @@
 			<div class="col-md-4 logo_agile">
 				<h1>
 					<a href="/"> <span>T</span>uan <span>V</span>u <span>S</span>hoppy
-						<img src="/imagesHome/logoShop.png" alt=" ">
+						<img src="imagesHome/logoShop.png" alt=" ">
 					</a>
 				</h1>
 			</div>
@@ -51,10 +51,10 @@
 				<ul>
 					<li><span class="fa fa-phone" aria-hidden="true"></span> 222 333 444</li>
 					<li><a href="/sign-in"> <span class="fa fa-unlock-alt"
-							aria-hidden="true"></span> Đăng Nhập
+							aria-hidden="true"></span> Đăng nhập
 					</a></li>
 					<li><a href="/sign-up"> <span
-							class="fa fa-pencil-square-o" aria-hidden="true"></span> Đăng Ký
+							class="fa fa-pencil-square-o" aria-hidden="true"></span> Đăng ký
 					</a></li>
 				</ul>
 				<!-- //header lists -->
@@ -62,7 +62,7 @@
 				<div class="agileits_search">
 					<form action="#" method="post">
 						<input name="Search" type="search"
-							placeholder="Chúng tôi có thể giúp gì?" required="">
+							placeholder="Hôm nay tôi có thể giúp gì cho bạn?" required="">
 						<button type="submit" class="btn btn-default"
 							aria-label="Left Align">
 							<span class="fa fa-search" aria-hidden="true"> </span>
@@ -111,9 +111,12 @@
 						<div class="collapse navbar-collapse menu--shylock"
 							id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav menu__list">
-								<li class=""><a class="nav-stylehead" href="/">Trang Chủ </a></li>
-								<li class=""><a class="nav-stylehead" href="/product">Sản Phẩm</a></li>
-								<li class=""><a class="nav-stylehead" href="/contact">Hộp Thư Ý Kiến</a></li>
+								<li class=""><a class="nav-stylehead" href="/">Trang
+										chủ </a></li>
+								<li class=""><a class="nav-stylehead" href="/product">Sản
+										phẩm</a></li>
+								<li class=""><a class="nav-stylehead" href="/contact">Hộp
+										thư ý kiến</a></li>
 							</ul>
 						</div>
 					</div>
@@ -145,7 +148,6 @@
 	<!-- Single Page -->
 	<div class="banner-bootom-w3-agileits">
 		<div class="container">
-		<div th:object="${Detail}">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l">Chi Tiết Sản Phẩm
 				<span class="heading-style">
@@ -159,10 +161,17 @@
 				<div class="grid images_3_of_2">
 					<div class="flexslider">
 						<ul class="slides">
-							<li data-thumb="imagesHome/si.jpg">
+							<li th:data-thumb="'/image/' + ${product.image}" data-thumb="imagesHome/si.jpg">
 								<div class="thumb-image">
-									<img th:src="'/image/' + ${productModel.product.image}"  data-imagezoom="true" class="img-responsive" alt="">
-								</div>
+									<img th:src="'/image/' + ${product.image}" src="imagesHome/si.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
+							</li>
+							<li th:data-thumb="'/image/' + ${product.image}" data-thumb="imagesHome/si.jpg">
+								<div class="thumb-image">
+									<img th:src="'/image/' + ${product.image}" src="imagesHome/si.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
+							</li>
+							<li th:data-thumb="'/image/' + ${product.image}" data-thumb="imagesHome/si.jpg">
+								<div class="thumb-image">
+									<img th:src="'/image/' + ${product.image}" src="imagesHome/si.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
 							</li>
 						</ul>
 						<div class="clearfix"></div>
@@ -170,10 +179,10 @@
 				</div>
 			</div>
 			<div class="col-md-7 single-right-left simpleCart_shelfItem">
-				<h3 th:text="*{product.productname}"></h3>
+				<h3 th:text="${product.productname}">Zeeba Premium Basmati Rice - 5 KG</h3>
 				<p>
-					<span class="item_price" th:text="*{product.price}"></span>
-					<label>VNĐ</label>
+					<span th:text="${product.price}" class="item_price">$950.00</span>
+					<label>Free delivery</label>
 				</p>
 				<div class="single-infoagile">
 					<ul>
@@ -192,6 +201,7 @@
 						</li>
 					</ul>
 				</div>
+				
 				<div class="occasion-cart">
 					<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
 						<form action="#" method="post">
@@ -215,37 +225,101 @@
 			</div>
 			<div class="clearfix"> </div>
 		</div>
-		</div>
 	</div>
 	<!-- //Single Page -->
-	
 	<!-- special offers -->
-	<!-- 
 	<div class="featured-section" id="projects">
 		<div class="container">
-			<h3 class="tittle-w3l">Sản Phẩm Liên Quan
+			<!-- tittle heading -->
+			<h3 class="tittle-w3l">Sản Phẩm Tương Tự
 				<span class="heading-style">
 					<i></i>
 					<i></i>
 					<i></i>
 				</span>
 			</h3>
-			
+			<!-- //tittle heading -->
 			<div class="content-bottom-in">
 				<ul id="flexiselDemo1">
-					<li th:each="Products : ${Products}">
+					<li>
 						<div class="w3l-specilamk">
 							<div class="speioffer-agile">
 								<a href="/detail">
-									<img alt="image" th:src="'/image/' + ${Products.image}" style="width: 150px;height: 150px;">
+									<img src="imagesHome/s1.jpg" alt="">
 								</a>
 							</div>
 							<div class="product-name-w3l">
 								<h4>
-									<a href="/detail"><p th:text="${Products.productname}"></p></a>
+									<a href="/detail">Aashirvaad, 5g</a>
 								</h4>
 								<div class="w3l-pricehkj">
-									<h6 th:text="${Products.price}"></h6>
+									<h6>$220.00</h6>
+								</div>
+								<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+									<form action="#" method="post">
+										<fieldset>
+											<input type="hidden" name="cmd" value="_cart" />
+											<input type="hidden" name="add" value="1" />
+											<input type="hidden" name="business" value=" " />
+											<input type="hidden" name="item_name" value="Aashirvaad, 5g" />
+											<input type="hidden" name="amount" value="220.00" />
+											<input type="hidden" name="discount_amount" value="1.00" />
+											<input type="hidden" name="currency_code" value="USD" />
+											<input type="hidden" name="return" value=" " />
+											<input type="hidden" name="cancel_return" value=" " />
+											<input type="submit" name="submit" value="Add to cart" class="button" />
+										</fieldset>
+									</form>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="w3l-specilamk">
+							<div class="speioffer-agile">
+								<a href="/detail">
+									<img src="imagesHome/s1.jpg" alt="">
+								</a>
+							</div>
+							<div class="product-name-w3l">
+								<h4>
+									<a href="/detail">Aashirvaad, 5g</a>
+								</h4>
+								<div class="w3l-pricehkj">
+									<h6>$220.00</h6>
+								</div>
+								<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+									<form action="#" method="post">
+										<fieldset>
+											<input type="hidden" name="cmd" value="_cart" />
+											<input type="hidden" name="add" value="1" />
+											<input type="hidden" name="business" value=" " />
+											<input type="hidden" name="item_name" value="Aashirvaad, 5g" />
+											<input type="hidden" name="amount" value="220.00" />
+											<input type="hidden" name="discount_amount" value="1.00" />
+											<input type="hidden" name="currency_code" value="USD" />
+											<input type="hidden" name="return" value=" " />
+											<input type="hidden" name="cancel_return" value=" " />
+											<input type="submit" name="submit" value="Add to cart" class="button" />
+										</fieldset>
+									</form>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="w3l-specilamk">
+							<div class="speioffer-agile">
+								<a href="/detail">
+									<img src="imagesHome/s1.jpg" alt="">
+								</a>
+							</div>
+							<div class="product-name-w3l">
+								<h4>
+									<a href="/detail">Aashirvaad, 5g</a>
+								</h4>
+								<div class="w3l-pricehkj">
+									<h6>$220.00</h6>
 								</div>
 								<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
 									<form action="#" method="post">
@@ -268,10 +342,8 @@
 					</li>
 				</ul>
 			</div>
-			
 		</div>
 	</div>
-	 -->
 	<!-- //special offers -->
 
 	<!-- footer -->
@@ -286,15 +358,15 @@
 					<div class="col-xs-6 footer-grids">
 						<h3>Menu Nhanh</h3>
 						<ul>
-							<li><a href="/">Trang chá»§</a></li>
-							<li><a href="/product">Sáº£n pháº©m</a></li>
-							<li><a href="/contact">Há»™p thÆ° Ã½ kiáº¿n</a></li>
+							<li><a href="/">Trang chủ</a></li>
+							<li><a href="/product">Sản phẩm</a></li>
+							<li><a href="/contact">Hộp thư ý kiến</a></li>
 						</ul>
 					</div>
 					<div class="col-xs-6 footer-grids">
-						<h3>Ä�á»‹a Chá»‰</h3>
+						<h3>Địa Chỉ</h3>
 						<ul>
-							<li><i class="fa fa-map-marker"></i> 123 Nguyá»…n VÄƒn T, Tp.DÆ°Æ¡ng ThÃ nh V</li>
+							<li><i class="fa fa-map-marker"></i> 123 Nguyễn Văn T, Tp.Dương Thành V</li>
 							<li><i class="fa fa-mobile"></i> 333 222 444</li>
 							<li><i class="fa fa-phone"></i> +222 333 444</li>
 							<li><i class="fa fa-envelope-o"></i> tuanvushop@gmail.com</li>
@@ -493,7 +565,7 @@
 	<!-- //flexisel (for special offers) -->
 
 	<!-- for bootstrap working -->
-	<script src="/jsHome/bootstrap.js"></script>
+	<script src="jsHome/bootstrap.js"></script>
 	<!-- //for bootstrap working -->
 	<!-- //js-files -->
 
