@@ -49,6 +49,6 @@ public class LoginController {
 	
 	@RequestMapping("/403")
 	public String accessDenied() {
-		return "403";
+		return "403LognIn";
 	}
 }
