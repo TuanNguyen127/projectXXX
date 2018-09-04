@@ -11,6 +11,7 @@ public class GooglePojo {
 	private String link;
 	private String picture;
 	private String gender;
+	private String hd;
 	public String getId() {
 		return id;
 	}
@@ -65,6 +66,10 @@ public class GooglePojo {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
-	
+	public String getHd() {
+		return hd;
+	}
+	public void setHd(String hd) {
+		this.hd = hd;
+	}
 }

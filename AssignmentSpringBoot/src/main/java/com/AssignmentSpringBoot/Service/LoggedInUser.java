@@ -1,17 +1,17 @@
-package com.AssignmentSpringBoot.Controller;
+package com.AssignmentSpringBoot.Service;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import com.AssignmentSpringBoot.Service.CustomUser;
+import com.AssignmentSpringBoot.Entity.User;
 
-@Component(value="useravatar")
+@Component(value="loggedinuser")
 @Scope("session")
-public class Avatar {
+public class LoggedInUser {
 
-	public String getUserAvatar() {
+	public User getUser() {
 		CustomUser user = (CustomUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return user.getAvatar();
+		return user.getUser();
 	}
 }

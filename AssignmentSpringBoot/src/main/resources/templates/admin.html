@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -35,7 +35,7 @@
 
 <body class="theme-red">
     <!-- Top Bar -->
-    <nav class="navbar">
+    <nav class="navbar" th:fragment="topbar">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
@@ -50,21 +50,24 @@
         </div>
     </nav>
     <!-- #Top Bar -->
-    <section>
+    <section th:fragment="sidebar">
         <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar">
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img th:src="'/image/' + ${@useravatar.getUserAvatar()}" width="48" height="48" alt="a" />
+                    <img th:src="'/image/' + ${@loggedinuser.getUser().avatar}" width="48" height="48" alt="a" />
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</div>
-                    <div class="email">admin@gmail.com</div>
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${@loggedinuser.getUser().username}">Admin</div>
+                    <div class="email" th:text="${@loggedinuser.getUser().email}">admin@gmail.com</div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                            <li>
+                            	<a href="#" onclick="document.getElementById('logout-form').submit();"><i class="material-icons">input</i>Sign Out</a>
+                            	<form th:action="@{/j_spring_security_logout}" id="logout-form" method="post"></form>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -217,7 +220,7 @@
 		                <div class="header" style="text-align: center;">
 		                	<b>Avatar</b>
 		                </div>
-		                <img alt="avatar" th:src="'/image/' + ${@useravatar.getUserAvatar()}" style="width: 240px;height: 240px;margin: 20px 35px 180px 35px;">
+		                <img alt="avatar" th:src="'/image/' + ${user.avatar}" style="width: 240px;height: 240px;margin: 20px 35px 180px 35px;">
 	                </div>
 	            </div>
 	        	<div class="col-md-8">

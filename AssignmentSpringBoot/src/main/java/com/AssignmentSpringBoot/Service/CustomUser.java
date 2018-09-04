@@ -11,19 +11,18 @@ public class CustomUser extends User {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String avatar;
+	private com.AssignmentSpringBoot.Entity.User user;
 	
-	public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities, String avatar) {
+	public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities, com.AssignmentSpringBoot.Entity.User user) {
 		super(username, password, authorities);
-		this.avatar = avatar;
+		this.user = user;
 	}
 
-	public String getAvatar() {
-		return avatar;
+	public com.AssignmentSpringBoot.Entity.User getUser() {
+		return user;
 	}
 
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
+	public void setUser(com.AssignmentSpringBoot.Entity.User user) {
+		this.user = user;
 	}
-	
 }

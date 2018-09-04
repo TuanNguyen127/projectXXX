@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -53,7 +54,8 @@ public class UserController {
 	public String doSaveUser(@ModelAttribute("UserNew") UserModel userModel, Model model) {
 		try {
 			MultipartFile multipartFile = userModel.getMultipartFile();
-			String fileName = multipartFile.getOriginalFilename();
+			String originalFileName = multipartFile.getOriginalFilename();
+			String fileName = UUID.randomUUID().toString() + originalFileName.substring(originalFileName.lastIndexOf("."));
 			File file = new File(this.getFolderUpload(), fileName);
 			multipartFile.transferTo(file);
 			userModel.getUser().setAvatar(fileName);
@@ -113,7 +115,8 @@ public class UserController {
 		}else {
 			try {
 				MultipartFile multipartFile = userModel.getMultipartFile();
-				String fileName = multipartFile.getOriginalFilename();
+				String originalFileName = multipartFile.getOriginalFilename();
+				String fileName = UUID.randomUUID().toString() + originalFileName.substring(originalFileName.lastIndexOf("."));
 				File file = new File(this.getFolderUpload(), fileName);
 				multipartFile.transferTo(file);
 				userModel.getUser().setAvatar(fileName);

@@ -32,7 +32,7 @@
 
 <body class="theme-red">
     <!-- Top Bar -->
-    <nav class="navbar">
+    <nav class="navbar" th:replace="admin :: topbar">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
@@ -47,7 +47,7 @@
         </div>
     </nav>
     <!-- #Top Bar -->
-    <section>
+    <section th:replace="admin :: sidebar">
         <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar">
             <!-- User Info -->

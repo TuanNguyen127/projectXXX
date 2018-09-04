@@ -39,7 +39,7 @@
 
 <body>
 	<!-- header-bot-->
-	<div class="header-bot">
+	<div class="header-bot" th:replace="index :: header">
 		<div class="header-bot_inner_wthreeinfo_header_mid">
 			<!-- header-bot-->
 			<div class="col-md-4 logo_agile">
@@ -189,7 +189,7 @@
 								<td class="invert" th:text="${product.productname}"></td>
 								<td class="invert" th:text="${product.quantity}"></td>
 								<td class="invert"
-									th:text="${product.price} * ${product.quantity}"></td>
+									th:text="${#numbers.formatInteger(product.price*product.quantity,3,'POINT')} + ' ₫'"></td>
 								<td class="invert"><a href="#" th:onclick="${'javascript:removefromcart(' + product.idproduct + ',' + product.quantity + ')'}"> <i
 										class="fa fa-times-rectangle"></i>
 								</a></td>

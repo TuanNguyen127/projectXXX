@@ -32,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception{
 		http.authorizeRequests().antMatchers("/admin/**").hasRole("admin");
 		http.authorizeRequests().antMatchers("/user/**").hasAnyRole("admin,user");
+		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 		//http.csrf().disable();
 		http.authorizeRequests().and().formLogin()
 		.loginProcessingUrl("/j_spring_security_login")

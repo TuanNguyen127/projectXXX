@@ -13,29 +13,31 @@
 		}
 	</script>
 	<!--//tags -->
-	<link href="cssHome/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="cssHome/style.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="cssHome/font-awesome.css" rel="stylesheet">
+	<link href="/cssHome/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="/cssHome/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="/cssHome/font-awesome.css" rel="stylesheet">
 	
 	<!--pop-up-box-->
-	<link href="cssHome/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="/cssHome/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
 	
 	<!-- price range -->
-	<link href="cssHome/jquery-ui1.css" rel="stylesheet" type="text/css">
+	<link href="/cssHome/jquery-ui1.css" rel="stylesheet" type="text/css">
 	
 	<!-- flexslider -->
-	<link href="cssHome/flexslider.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="/cssHome/flexslider.css" rel="stylesheet" type="text/css" media="screen" />
 	
 	<!-- fonts -->
 	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
 	
 	<!-- fa fa-icons -->
 	<link type="text/css" rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+	
+	<script th:replace="index :: addtocartjs"></script>
 </head>
 
 <body>
 	<!-- header-bot-->
-	<div class="header-bot">
+	<div class="header-bot" th:replace="index :: header">
 		<div class="header-bot_inner_wthreeinfo_header_mid">
 			<!-- header-bot-->
 			<div class="col-md-4 logo_agile">
@@ -181,13 +183,13 @@
 			<div class="col-md-7 single-right-left simpleCart_shelfItem">
 				<h3 th:text="${product.productname}">Zeeba Premium Basmati Rice - 5 KG</h3>
 				<p>
-					<span th:text="${product.price}" class="item_price">$950.00</span>
-					<label>Free delivery</label>
+					<span th:text="${#numbers.formatInteger(product.price,3,'POINT')} + ' ₫'" class="item_price">$950.00</span>
+					<label>Miễn phí vận chuyển</label>
 				</p>
 				<div class="single-infoagile">
 					<ul>
 						<li>
-							Cash on Delivery Eligible.
+							Thanh toán tiền mặt khi nhận hàng
 						</li>
 						<li>
 							Shipping Speed to Delivery.
@@ -195,29 +197,12 @@
 						<li>
 							Sold and fulfilled by Supple Tek (3.6 out of 5 | 8 ratings).
 						</li>
-						<li>
-							1 offer from
-							<span class="item_price">$950.00</span>
-						</li>
 					</ul>
 				</div>
 				
 				<div class="occasion-cart">
 					<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-						<form action="#" method="post">
-							<fieldset>
-								<input type="hidden" name="cmd" value="_cart" />
-								<input type="hidden" name="add" value="1" />
-								<input type="hidden" name="business" value=" " />
-								<input type="hidden" name="item_name" value="Zeeba Premium Basmati Rice - 5 KG" />
-								<input type="hidden" name="amount" value="950.00" />
-								<input type="hidden" name="discount_amount" value="1.00" />
-								<input type="hidden" name="currency_code" value="USD" />
-								<input type="hidden" name="return" value=" " />
-								<input type="hidden" name="cancel_return" value=" " />
-								<input type="submit" name="submit" value="Add to cart" class="button" />
-							</fieldset>
-						</form>
+						<input type="button" value="Add to cart" class="button" th:onclick="${'javascript:addtocart(' + product.idproduct + ')'}"/>
 					</div>
 
 				</div>
@@ -241,101 +226,22 @@
 			<!-- //tittle heading -->
 			<div class="content-bottom-in">
 				<ul id="flexiselDemo1">
-					<li>
+					<li th:each="product : ${recommendproduct}" th:if="${productStat.index} < 3">
 						<div class="w3l-specilamk">
 							<div class="speioffer-agile">
-								<a href="/detail">
-									<img src="imagesHome/s1.jpg" alt="">
+								<a th:href="@{'/detail?id=' + ${product.idproduct}}">
+									<img th:src="'/image/' + ${product.image}" style="max-width: 100%; height: 150px;" alt="">
 								</a>
 							</div>
 							<div class="product-name-w3l">
 								<h4>
-									<a href="/detail">Aashirvaad, 5g</a>
+									<a th:href="@{'/detail?id=' + ${product.idproduct}}" th:text="${product.productname}">Aashirvaad, 5g</a>
 								</h4>
 								<div class="w3l-pricehkj">
-									<h6>$220.00</h6>
+									<h6 th:text="${#numbers.formatInteger(product.price,3,'POINT')} + ' ₫'">$220.00</h6>
 								</div>
 								<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-									<form action="#" method="post">
-										<fieldset>
-											<input type="hidden" name="cmd" value="_cart" />
-											<input type="hidden" name="add" value="1" />
-											<input type="hidden" name="business" value=" " />
-											<input type="hidden" name="item_name" value="Aashirvaad, 5g" />
-											<input type="hidden" name="amount" value="220.00" />
-											<input type="hidden" name="discount_amount" value="1.00" />
-											<input type="hidden" name="currency_code" value="USD" />
-											<input type="hidden" name="return" value=" " />
-											<input type="hidden" name="cancel_return" value=" " />
-											<input type="submit" name="submit" value="Add to cart" class="button" />
-										</fieldset>
-									</form>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="w3l-specilamk">
-							<div class="speioffer-agile">
-								<a href="/detail">
-									<img src="imagesHome/s1.jpg" alt="">
-								</a>
-							</div>
-							<div class="product-name-w3l">
-								<h4>
-									<a href="/detail">Aashirvaad, 5g</a>
-								</h4>
-								<div class="w3l-pricehkj">
-									<h6>$220.00</h6>
-								</div>
-								<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-									<form action="#" method="post">
-										<fieldset>
-											<input type="hidden" name="cmd" value="_cart" />
-											<input type="hidden" name="add" value="1" />
-											<input type="hidden" name="business" value=" " />
-											<input type="hidden" name="item_name" value="Aashirvaad, 5g" />
-											<input type="hidden" name="amount" value="220.00" />
-											<input type="hidden" name="discount_amount" value="1.00" />
-											<input type="hidden" name="currency_code" value="USD" />
-											<input type="hidden" name="return" value=" " />
-											<input type="hidden" name="cancel_return" value=" " />
-											<input type="submit" name="submit" value="Add to cart" class="button" />
-										</fieldset>
-									</form>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="w3l-specilamk">
-							<div class="speioffer-agile">
-								<a href="/detail">
-									<img src="imagesHome/s1.jpg" alt="">
-								</a>
-							</div>
-							<div class="product-name-w3l">
-								<h4>
-									<a href="/detail">Aashirvaad, 5g</a>
-								</h4>
-								<div class="w3l-pricehkj">
-									<h6>$220.00</h6>
-								</div>
-								<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-									<form action="#" method="post">
-										<fieldset>
-											<input type="hidden" name="cmd" value="_cart" />
-											<input type="hidden" name="add" value="1" />
-											<input type="hidden" name="business" value=" " />
-											<input type="hidden" name="item_name" value="Aashirvaad, 5g" />
-											<input type="hidden" name="amount" value="220.00" />
-											<input type="hidden" name="discount_amount" value="1.00" />
-											<input type="hidden" name="currency_code" value="USD" />
-											<input type="hidden" name="return" value=" " />
-											<input type="hidden" name="cancel_return" value=" " />
-											<input type="submit" name="submit" value="Add to cart" class="button" />
-										</fieldset>
-									</form>
+									<input type="button" value="Add to cart" class="button" th:onclick="${'javascript:addtocart(' + product.idproduct + ')'}"/>
 								</div>
 							</div>
 						</div>
@@ -407,11 +313,11 @@
 	
 	<!-- js-files -->
 	<!-- jquery -->
-	<script src="jsHome/jquery-2.1.4.min.js"></script>
+	<script src="/jsHome/jquery-2.1.4.min.js"></script>
 	<!-- //jquery -->
 
 	<!-- popup modal (for signin & signup)-->
-	<script src="jsHome/jquery.magnific-popup.js"></script>
+	<script src="/jsHome/jquery.magnific-popup.js"></script>
 	<script>
 		$(document).ready(function () {
 			$('.popup-with-zoom-anim').magnificPopup({
@@ -435,7 +341,7 @@
 	<!-- //popup modal (for signin & signup)-->
 
 	<!-- cart-js -->
-	<script src="jsHome/minicart.js"></script>
+	<script src="/jsHome/minicart.js"></script>
 	<script>
 		paypalm.minicartk.render(); //use only unique class names other than paypal1.minicart1.Also Replace same class name in css and minicart.min.js
 
@@ -478,12 +384,12 @@
 	<!-- //password-script -->
 
 	<!-- smoothscroll -->
-	<script src="jsHome/SmoothScroll.min.js"></script>
+	<script src="/jsHome/SmoothScroll.min.js"></script>
 	<!-- //smoothscroll -->
 
 	<!-- start-smooth-scrolling -->
-	<script src="jsHome/move-top.js"></script>
-	<script src="jsHome/easing.js"></script>
+	<script src="/jsHome/move-top.js"></script>
+	<script src="/jsHome/easing.js"></script>
 	<script>
 		jQuery(document).ready(function ($) {
 			$(".scroll").click(function (event) {
@@ -517,11 +423,11 @@
 	<!-- //smooth-scrolling-of-move-up -->
 
 	<!-- imagezoom -->
-	<script src="jsHome/imagezoom.js"></script>
+	<script src="/jsHome/imagezoom.js"></script>
 	<!-- //imagezoom -->
 
 	<!-- FlexSlider -->
-	<script src="jsHome/jquery.flexslider.js"></script>
+	<script src="/jsHome/jquery.flexslider.js"></script>
 	<script>
 		// Can also be used with $(document).ready()
 		$(window).load(function () {
@@ -534,7 +440,7 @@
 	<!-- //FlexSlider-->
 
 	<!-- flexisel (for special offers) -->
-	<script src="jsHome/jquery.flexisel.js"></script>
+	<script src="/jsHome/jquery.flexisel.js"></script>
 	<script>
 		$(window).load(function () {
 			$("#flexiselDemo1").flexisel({
@@ -565,7 +471,7 @@
 	<!-- //flexisel (for special offers) -->
 
 	<!-- for bootstrap working -->
-	<script src="jsHome/bootstrap.js"></script>
+	<script src="/jsHome/bootstrap.js"></script>
 	<!-- //for bootstrap working -->
 	<!-- //js-files -->
 

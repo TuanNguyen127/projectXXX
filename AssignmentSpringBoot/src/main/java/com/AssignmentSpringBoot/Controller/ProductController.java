@@ -3,6 +3,7 @@ package com.AssignmentSpringBoot.Controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,8 @@ public class ProductController {
 	public String doSaveUser(@ModelAttribute("ProductNew") ProductModel productModel, Model model) {
 		try {
 			MultipartFile multipartFile = productModel.getMultipartFile();
-			String fileName = multipartFile.getOriginalFilename();
+			String originalFileName = multipartFile.getOriginalFilename();
+			String fileName = UUID.randomUUID().toString() + originalFileName.substring(originalFileName.lastIndexOf("."));
 			File file = new File(this.getFolderUpload(), fileName);
 			multipartFile.transferTo(file);
 			productModel.getProduct().setImage(fileName);
@@ -111,7 +113,8 @@ public class ProductController {
 		}else {
 			try {
 				MultipartFile multipartFile = productModel.getMultipartFile();
-				String fileName = multipartFile.getOriginalFilename();
+				String originalFileName = multipartFile.getOriginalFilename();
+				String fileName = UUID.randomUUID().toString() + originalFileName.substring(originalFileName.lastIndexOf("."));
 				File file = new File(this.getFolderUpload(), fileName);
 				multipartFile.transferTo(file);
 				productModel.getProduct().setImage(fileName);
